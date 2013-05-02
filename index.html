@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+  <head>
+    <title>Agile Designer</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./css/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./css/themes/icon.css">
+    <script type="text/javascript" src="./js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+  </head>
+  <body class="easyui-layout">
+    <div data-options="region:'north',title:'Agile Designer', border: false" style="height:100px;">
+    </div>
+      <div data-options="region:'south',title:'Console',split:true" style="height:200px;"></div>
+      <div data-options="region:'east',iconCls:'icon-reload',title:'Source Tree',split:true" style="width:200px;"></div>
+      <div data-options="region:'west',title:'Menu',split:true" style="width:200px;">
+      <div id="d" class="easyui-draggable" data-options="handle:'#title'" style="width:100px;height:100px;">  
+        <ul>
+          <li id="menu1">menu1</li>
+          <li id="menu2">menu2</li>
+        </ul>
+      </div> 
+      </div>
+      <div id="canvas" data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+      </div>
+  </body>
+  <script type="text/javascript">
+    jQuery("body").layout();
+    jQuery("#canvas").droppable();
+    jQuery("li#menu1").bind('click', function (source) {
+        jQuery("#canvas").bind('click', function (destination) {
+          var $dest = jQuery(destination.target);
+          var $obj = $("<input/>").attr("id", "test").addClass("easyui-validatebox").validatebox();
+          //alert(source.pageX + ":" + source.pageY);
+          var $container = jQuery("<div/>").attr("id", "container").addClass("easyui-draggable").draggable().append($obj);
+          jQuery("#canvas").append($container);
+          $container.offset({top:destination.pageY, left:destination.pageX});
+          jQuery("#canvas").unbind('click');
+        });
+    });
+  </script>
+</html>
