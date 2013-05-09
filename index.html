@@ -15,20 +15,31 @@
       <div data-options="region:'south',title:'Console',split:true" style="height:200px;"></div>
       <div data-options="region:'east',iconCls:'icon-reload',title:'Source Tree',split:true" style="width:200px;"></div>
       <div data-options="region:'west',title:'Menu',split:true" style="width:200px;">
-      <div id="d" class="easyui-draggable" data-options="handle:'#title'" style="width:100px;height:100px;">  
+        <div id="accordion" class="easyui-accordion">
+          <div title="Form Element" data-options="" style="overflow:auto;">
+            <div id="text" style="border:1px solid #000000;padding: 2px;">Text Element</div>
+            <div id="textarea" style="border:1px solid #000000;padding: 2px;">Textarea Element</div>
+            <div id="textarea" style="border:1px solid #000000;padding: 2px;">Element</div>
+          </div>
+          <div title="Label Element" data-options="" style="overflow:auto;">
+          </div>
+          <div title="Other Element" data-options="" style="overflow:auto;">
+          </div>
+        </div>
+      <!--div id="d" class="easyui-draggable" data-options="handle:'#title'" style="width:100px;height:100px;">  
         <ul>
           <li id="menu1">menu1</li>
           <li id="menu2">menu2</li>
         </ul>
-      </div> 
+      </div --> 
       </div>
-      <div id="canvas" data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;">
+      <div id="canvas" data-options="region:'center', title:'center title', tools:[{iconCls:'icon-cancel', handler: function() {alert('test')}}]" style="padding:5px;background:#eee;">
       </div>
   </body>
   <script type="text/javascript">
     jQuery("body").layout();
     jQuery("#canvas").droppable();
-    jQuery("li#menu1").bind('click', function (source) {
+    jQuery("#text").bind('click', function (source) {
         jQuery("#canvas").bind('click', function (destination) {
           var $dest = jQuery(destination.target);
           var $obj = $("<input/>").attr("id", "test").addClass("easyui-validatebox").validatebox();
@@ -39,5 +50,8 @@
           jQuery("#canvas").unbind('click');
         });
     });
+    //var $canvas = jQuery("body").layout('panel', 'center');
+    //$canvas.tools = [{iconCls:'icon-cancel', handler:function() {alert('test')}}];
+    //$canvas.iconCls = 'icon-cancel';
   </script>
 </html>
